@@ -10,8 +10,8 @@ Menu::Menu(sf::RenderWindow* hwnd, Input* in, GameState* game)
 	level1 = new Level(window, input, gameState);
 
 
-	font.loadFromFile("font/ZOMBIES REBORN.ttf");
-	title.loadFromFile("font/BloodBlocks Project.ttf");
+	font.loadFromFile("font/Robot9000-MVxZx.ttf");
+	title.loadFromFile("font/AdrenalineHitItalic-X3KYg.ttf");
 
 
 	menu_texture.loadFromFile("gfx/menu.png");
