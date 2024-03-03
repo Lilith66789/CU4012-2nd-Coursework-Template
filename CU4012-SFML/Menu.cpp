@@ -21,7 +21,7 @@ Menu::Menu(sf::RenderWindow* hwnd, Input* in, GameState* game)
 
 	Title.setFont(title);
 	Title.setFillColor(sf::Color::Magenta);
-	Title.setString("My Game");
+	Title.setString("PlaceHolder");
 	Title.setOutlineColor(sf::Color::Black);
 	Title.setCharacterSize(70);
 	Title.setPosition(500, 50);

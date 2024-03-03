@@ -140,7 +140,9 @@
     <ClCompile Include="Framework\Input.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\BaseLevel.h" />
@@ -149,7 +151,9 @@
     <ClInclude Include="Framework\GameState.h" />
     <ClInclude Include="Framework\Input.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Framework\DO_NOT_EDIT.txt" />
