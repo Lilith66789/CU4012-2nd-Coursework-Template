@@ -1,4 +1,8 @@
-﻿  Menu.cpp
+﻿  Main.cpp
+  Menu.cpp
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Menu.cpp(19,33): warning C4305: 'argument': truncation from 'double' to 'float'
+  Player.cpp
+  Generating Code...
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Menu.cpp(112): warning C4715: 'Menu::handleInput': not all control paths return a value
+  LINK : C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\x64\Debug\CU4012-SFML.exe not found or not built by the last incremental link; performing full link
   CU4012-SFML.vcxproj -> C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\x64\Debug\CU4012-SFML.exe

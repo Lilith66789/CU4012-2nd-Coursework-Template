@@ -4,6 +4,7 @@
 #include "Framework/BaseLevel.h"
 #include "Framework/Input.h"
 #include "Framework/GameState.h"
+#include "Player.h"
 #include <string>
 #include <iostream>
 
@@ -19,5 +20,8 @@ public:
 
 private:
 	// Default variables for level class.
-
+		//Player Objects 
+	Player playerSprite;
+	sf::Texture PlayerTex;
+	Player CollisionBox;
 };
