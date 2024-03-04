@@ -7,6 +7,7 @@
 #include "Player.h"
 #include <string>
 #include <iostream>
+#include "Background.h"
 
 
 class Level : public BaseLevel{
@@ -24,4 +25,17 @@ private:
 	Player playerSprite;
 	sf::Texture PlayerTex;
 	Player CollisionBox;
+
+	//Background stuff
+	Background bg[4];
+	Background bg1[4];
+	Background bg2[4];
+	Background bg3[4];
+
+	sf::Texture backgroundTex[4];
+
+
+
+	sf::View view;
+
 };
