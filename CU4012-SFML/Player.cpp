@@ -48,7 +48,7 @@ void Player::update(float dt)
 	}
 
 	setCollisionBox(getPosition(), getSize());
-	move(sf::Vector2f(0, 0.02));
+	//move(sf::Vector2f(0, 0.02));
 }
 
 

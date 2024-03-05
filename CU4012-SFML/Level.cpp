@@ -10,7 +10,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 
 
 	//Player Texture Initialisation 
-	playerSprite.setPosition(300, 300);
+	playerSprite.setPosition(100, 300);
 
 	//Setting Input and Velocity 
 	playerSprite.setInput(input);
@@ -107,6 +107,7 @@ void Level::update(float dt)
 	if (playerSprite.checkCollision(e1.getCollisionBox()))
 	{
 		playerSprite.collisionResponse(&e1);
+		
 	}
 	else
 	{
