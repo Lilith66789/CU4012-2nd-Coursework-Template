@@ -7,11 +7,9 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 	gameState = gs;
 
 	// initialise game objects
-	PlayerTex.loadFromFile("Assets/Ball and Chain Bot/Run/runPlac.png");
+
 
 	//Player Texture Initialisation 
-	playerSprite.setTexture(&PlayerTex);
-	playerSprite.setSize(sf::Vector2f(100, 100));
 	playerSprite.setPosition(300, 300);
 
 	//Setting Input and Velocity 
@@ -73,6 +71,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 	fg1.setInput(input);
 	fg1.setWindow(window);
 
+	e1.setPosition(500, 100);
 }
 
 Level::~Level()
@@ -103,12 +102,24 @@ void Level::handleInput(float dt)
 void Level::update(float dt)
 {
 	playerSprite.update(dt);
+	e1.update(dt);
+
+	if (playerSprite.checkCollision(e1.getCollisionBox()))
+	{
+		playerSprite.collisionResponse(&e1);
+	}
+	else
+	{
+		playerSprite.setColliding(false);
+	}
+
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
+
 
 	for (int i = 0; i < 4; i++) 
 	{
@@ -119,7 +130,12 @@ void Level::render()
 
 	}
 	window->draw(fg1);
+	
 	window->draw(playerSprite);
+	window->draw(playerSprite.getDebugCollisionBox());
+
+	window->draw(e1);
+	window->draw(e1.getDebugCollisionBox());
 
 	endDraw();
 }

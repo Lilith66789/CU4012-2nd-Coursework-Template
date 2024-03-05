@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 #include "Background.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 class Level : public BaseLevel{
@@ -23,8 +25,6 @@ private:
 	// Default variables for level class.
 		//Player Objects 
 	Player playerSprite;
-	sf::Texture PlayerTex;
-	Player CollisionBox;
 
 	//Background stuff
 	Background bg[4];
@@ -43,5 +43,7 @@ private:
 	Background fg1;
 
 	sf::Texture foregroundTex1;
+
+	Enemy e1;
 
 };
