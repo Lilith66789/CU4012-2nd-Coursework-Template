@@ -38,4 +38,10 @@ private:
 
 	sf::View view;
 
+
+	//Foreground Stuff
+	Background fg1;
+
+	sf::Texture foregroundTex1;
+
 };

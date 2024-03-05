@@ -10,33 +10,33 @@ Menu::Menu(sf::RenderWindow* hwnd, Input* in, GameState* game)
 	level1 = new Level(window, input, gameState);
 
 
-	font.loadFromFile("font/Robot9000-MVxZx.ttf");
-	title.loadFromFile("font/AdrenalineHitItalic-X3KYg.ttf");
+	font.loadFromFile("font/VirtualRotRegular-R51V.ttf");
+	title.loadFromFile("font/VirtualRotRegular-R51V.ttf");
 
 
 	menu_texture.loadFromFile("gfx/menu.png");
 	menu_sprite.setTexture(menu_texture);
-	menu_sprite.setScale(0.27, 0.45);
+	menu_sprite.setScale(0.65, 0.95);
 
 
 	Title.setFont(title);
-	Title.setFillColor(sf::Color::Magenta);
+	Title.setFillColor(sf::Color::Red);
 	Title.setString("PlaceHolder");
 	Title.setOutlineColor(sf::Color::Black);
-	Title.setCharacterSize(70);
-	Title.setPosition(500, 50);
+	Title.setCharacterSize(60);
+	Title.setPosition(560, 50);
 
 
 	menu[0].setFont(font);
 	menu[0].setFillColor(sf::Color::Red);
 	menu[0].setString("Play");
-	menu[0].setPosition(sf::Vector2f(600,120));
+	menu[0].setPosition(sf::Vector2f(720,160));
 
 
 	menu[1].setFont(font);
 	menu[1].setFillColor(sf::Color::White);
 	menu[1].setString("Exit");
-	menu[1].setPosition(sf::Vector2f(600,150));
+	menu[1].setPosition(sf::Vector2f(720,190));
 
 
 	selectedItem = 0;

@@ -24,7 +24,11 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 	backgroundTex[2].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/3.png");
 	backgroundTex[3].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/5.png");
 
+	//Foreground
+	foregroundTex1.loadFromFile("Assets/TileSets/Foreground/Screenshot 2024-03-05 112159.png");
 
+
+	//Background
 
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -61,6 +65,13 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 	}
 
 	window->setView(view);
+
+	//Foreground
+	fg1.setTexture(&foregroundTex1);
+	fg1.setSize(sf::Vector2f(150,50));
+	fg1.setPosition(sf::Vector2f(100, 850));
+	fg1.setInput(input);
+	fg1.setWindow(window);
 
 }
 
@@ -107,6 +118,7 @@ void Level::render()
 		window->draw(bg3[i]);
 
 	}
+	window->draw(fg1);
 	window->draw(playerSprite);
 
 	endDraw();
