@@ -22,10 +22,6 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 	backgroundTex[2].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/3.png");
 	backgroundTex[3].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/5.png");
 
-	//Foreground
-	foregroundTex1.loadFromFile("Assets/TileSets/Foreground/Screenshot 2024-03-05 112159.png");
-
-
 	//Background
 
 	for (size_t i = 0; i < 4; i++)
@@ -64,12 +60,12 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 
 	window->setView(view);
 
-	//Foreground
-	fg1.setTexture(&foregroundTex1);
-	fg1.setSize(sf::Vector2f(150,50));
-	fg1.setPosition(sf::Vector2f(100, 850));
-	fg1.setInput(input);
-	fg1.setWindow(window);
+	//platforms
+	pf1.setPosition(500, 500);
+
+
+
+	//enemies
 
 	e1.setPosition(500, 100);
 }
@@ -103,6 +99,7 @@ void Level::update(float dt)
 {
 	playerSprite.update(dt);
 	e1.update(dt);
+	pf1.update(dt);
 
 	if (playerSprite.checkCollision(e1.getCollisionBox()))
 	{
@@ -114,6 +111,16 @@ void Level::update(float dt)
 		playerSprite.setColliding(false);
 	}
 
+
+	pf1.update(dt);
+	if (playerSprite.checkCollision(pf1.getCollisionBox()))
+	{
+		playerSprite.collisionResponse(&pf1);
+	}
+	else
+	{
+		playerSprite.setColliding(false);
+	}
 }
 
 // Render level
@@ -130,7 +137,7 @@ void Level::render()
 		window->draw(bg3[i]);
 
 	}
-	window->draw(fg1);
+	window->draw(pf1);
 	
 	window->draw(playerSprite);
 	window->draw(playerSprite.getDebugCollisionBox());

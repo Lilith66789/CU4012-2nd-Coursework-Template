@@ -10,6 +10,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Platforms.h"
 
 
 class Level : public BaseLevel{
@@ -40,9 +41,7 @@ private:
 
 
 	//Foreground Stuff
-	Background fg1;
-
-	sf::Texture foregroundTex1;
+	Platforms pf1;
 
 	Enemy e1;
 
