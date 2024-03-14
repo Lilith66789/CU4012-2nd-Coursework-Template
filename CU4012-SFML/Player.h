@@ -6,6 +6,7 @@ class Player : public GameObject
 {
 	int health;
 	float speed;
+
 	sf::Texture texture;
 
 	sf::Vector2f lastSafePosition;

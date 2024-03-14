@@ -61,7 +61,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 	window->setView(view);
 
 	//platforms
-	pf1.setPosition(500, 500);
+	pf1.setPosition(100, 500);
 
 
 

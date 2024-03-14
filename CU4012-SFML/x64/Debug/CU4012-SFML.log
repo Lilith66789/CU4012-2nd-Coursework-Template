@@ -1,6 +1,2 @@
-﻿  Level.cpp
-  Main.cpp
-  Menu.cpp
-C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Menu.cpp(17,33): warning C4305: 'argument': truncation from 'double' to 'float'
-  Generating Code...
+﻿  Player.cpp
   CU4012-SFML.vcxproj -> C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\x64\Debug\CU4012-SFML.exe

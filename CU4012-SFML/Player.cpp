@@ -4,7 +4,7 @@ Player::Player()
 {
 
 	health = 100;
-	speed = 150;
+	speed = 200;
 
 	if (!texture.loadFromFile("Assets/Ball and Chain Bot/Run/runPlac.png"))
 	{

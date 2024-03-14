@@ -10,7 +10,7 @@ Platforms::Platforms()
 		std::cout << "File not found\n";
 	}
 	setTexture(&PlatformTex);
-	setSize(sf::Vector2f(500, 500));
+	setSize(sf::Vector2f(500, 100));
 	setCollisionBox(getPosition(), getSize());
 }
 
