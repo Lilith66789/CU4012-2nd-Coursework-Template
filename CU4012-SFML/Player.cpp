@@ -1,10 +1,11 @@
 #include "Player.h"
 
+
 Player::Player()
 {
 
 	health = 100;
-	speed = 200;
+	speed = 150;
 
 	if (!texture.loadFromFile("Assets/Ball and Chain Bot/Run/runPlac.png"))
 	{
@@ -13,50 +14,38 @@ Player::Player()
 	setTexture(&texture);
 	setSize(sf::Vector2f(100, 100));
 	setCollisionBox(getPosition(), getSize());
+	setMass(100.f);
+	setTag("Player");
+
 }
 
 void Player::handleInput(float dt)
 {
+
+	velocity = sf::Vector2f(0, 0);
+
+
+	// Check each key independently, rather than using else-if statements
 	if (input->isKeyDown(sf::Keyboard::A))
 	{
-		velocity = sf::Vector2f(1, 0);
-		move(-velocity*speed *dt);
+		velocity.x = -1 * speed;
 	}
 	if (input->isKeyDown(sf::Keyboard::D))
 	{
-		velocity = sf::Vector2f(1, 0);
-		move(velocity * speed * dt);
-	}
-
-	if (input->isKeyDown(sf::Keyboard::W))
-	{
-		velocity = sf::Vector2f(0, 1);
-		move(-velocity * speed * dt);
+		velocity.x = 1 * speed;
 	}
 	if (input->isKeyDown(sf::Keyboard::S))
 	{
-		velocity = sf::Vector2f(0, 1);
-		move(velocity * speed * dt);
+		velocity.y = 1 * speed;
+	}
+	
+	if (input->isKeyDown(sf::Keyboard::W))
+	{
+		velocity.y = -1 * speed;
 	}
 }
 
 void Player::update(float dt)
 {
-	if (!Colliding)
-	{
-		lastSafePosition = this->getPosition();
-	}
 
-	setCollisionBox(getPosition(), getSize());
-	//move(sf::Vector2f(0, 0.02));
-}
-
-
-
-
-void Player::collisionResponse(GameObject* collider)
-{
-	this->setColliding(true);
-	collider->setVelocity(sf::Vector2f(0, 0));
-	setPosition(lastSafePosition);
 }

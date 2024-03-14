@@ -1,28 +1,54 @@
 #include "Level.h"
+#include "Player.h"
 
-Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
+Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 {
 	window = hwnd;
 	input = in;
 	gameState = gs;
+	world = w;
+
+	if (!font.loadFromFile("font/arial.ttf")) {
+		std::cout << "error loading font" << std::endl;
+	};
+
+	TileEditorText.setFont(font);
+	TileEditorText.setCharacterSize(24);
+	TileEditorText.setFillColor(sf::Color::Red);
+
+	TileEditorText.setString(" Press E to edit tiles");
+	TileEditorText.setPosition(0, 0);
+
+
+	sf::View view(sf::FloatRect(0, 0, 1920, 1080));
 
 	// initialise game objects
 
+	p1.setPosition(100, 100);
+	p1.setInput(input);
 
-	//Player Texture Initialisation 
-	playerSprite.setPosition(100, 300);
+	e1.setPosition(500, 100);
+	world->AddGameObject(p1);
+	world->AddGameObject(e1);
 
-	//Setting Input and Velocity 
-	playerSprite.setInput(input);
+	tileManager.setInput(input);
+	tileManager.setWindow(window);
+	tileManager.setWorld(world);
 
+	if (!tileManager.loadTiles())
+	{
+		std::cout << "Tiles not found\n";
+	}
+	else
+	{
+		std::cout << "Tiles loaded\n";
+	}
 
 	//Background
 	backgroundTex[0].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/1.png");
 	backgroundTex[1].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/2.png");
 	backgroundTex[2].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/3.png");
 	backgroundTex[3].loadFromFile("Assets/TileSets/1 Backgrounds/1/Day/5.png");
-
-	//Background
 
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -57,17 +83,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs)
 		bg3[i].setInput(input);
 		bg3[i].setWindow(window);
 	}
-
 	window->setView(view);
-
-	//platforms
-	pf1.setPosition(100, 500);
-
-
-
-	//enemies
-
-	e1.setPosition(500, 100);
 }
 
 Level::~Level()
@@ -78,49 +94,91 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
-	playerSprite.handleInput(dt);
-
-	for (int i = 0; i < 4; i++)
-	{
-		bg[i].handleInput(dt);
-		bg1[i].handleInput(dt);
-		bg2[i].handleInput(dt);
-		bg3[i].handleInput(dt);
-	}
-
 	if (input->isKeyDown(sf::Keyboard::Escape))
 	{
 		exit(0);
+	}
+
+	// Check if 'E' is pressed to toggle editing mode
+	if (input->isKeyDown(sf::Keyboard::E))
+	{
+		// First, if we're in edit mode, we save the tiles
+		if (editMode)
+		{
+			std::cout << "Exiting edit mode. Saving tiles...\n";
+			tileManager.saveTiles(tileManager.getTiles(), tileManager.getFilePath());
+		}
+		// Then toggle the edit mode
+		editMode = !editMode;
+		input->setKeyUp(sf::Keyboard::E); // Acknowledge the key press
+	}
+
+	if (editMode)
+	{
+		// Handle moving the view or other edit-mode-specific logic
+		moveView(dt);
+		//tileManager.handleInput(dt); // tileManager might have its own logic for when editing is true
+	}
+	else
+	{
+
+
+		p1.handleInput(dt);
+		for (int i = 0; i < 4; i++)
+		{
+			bg[i].handleInput(dt);
+			bg1[i].handleInput(dt);
+			bg2[i].handleInput(dt);
+			bg3[i].handleInput(dt);
+		}
 	}
 }
 
 // Update game objects
 void Level::update(float dt)
 {
-	playerSprite.update(dt);
-	e1.update(dt);
-	pf1.update(dt);
+	sf::Vector2f viewSize = sf::Vector2f(window->getSize().x, window->getSize().y);
 
-	if (playerSprite.checkCollision(e1.getCollisionBox()))
+
+	if (p1.CollisionWithTag("Enemy"))
 	{
-		playerSprite.collisionResponse(&e1);
+		std::cout << "Collision with enemy\n";
+	}
+
+	if (e1.CollisionWithTag("Wall"))
+	{
+		world->RemoveGameObject(e1);
+		std::cout << "Collision with wall\n";
+		e1.setVelocity(-e1.getVelocity());
+	}
+
+	if (editMode)
+	{
+		TileEditorText.setPosition(view.getCenter().x - viewSize.x / 2, view.getCenter().y - viewSize.y / 2);
+		TileEditorText.setString("Editing mode\nPress B to set collider as a wall (allows bouncing) \nPress E to exit and Save");
+		tileManager.handleInput(dt);
+		tileManager.update(dt);
+	}
+	else
+	{
 		
-	}
-	else
-	{
-		playerSprite.setColliding(false);
+
+		// Lock camera y-axis position
+		sf::View view = window->getView();
+		view.setCenter(view.getCenter().x, 540);
+
+		// Follow player on the x-axis
+		sf::Vector2f playerPosition = p1.getPosition();
+		float newX = std::max(playerPosition.x, view.getSize().x / 2.0f); // Ensure left side doesn't go past x = 0
+		view.setCenter(newX, view.getCenter().y);
+
+		TileEditorText.setPosition(view.getCenter().x - viewSize.x / 2, view.getCenter().y - viewSize.y / 2);
+		TileEditorText.setString("Press E to edit tiles");
+
+		window->setView(view);
 	}
 
-
-	pf1.update(dt);
-	if (playerSprite.checkCollision(pf1.getCollisionBox()))
-	{
-		playerSprite.collisionResponse(&pf1);
-	}
-	else
-	{
-		playerSprite.setColliding(false);
-	}
+	
 }
 
 // Render level
@@ -129,7 +187,7 @@ void Level::render()
 	beginDraw();
 
 
-	for (int i = 0; i < 4; i++) 
+	for (int i = 0; i < 4; i++)
 	{
 		window->draw(bg[i]);
 		window->draw(bg1[i]);
@@ -137,13 +195,55 @@ void Level::render()
 		window->draw(bg3[i]);
 
 	}
-	window->draw(pf1);
-	
-	window->draw(playerSprite);
-	window->draw(playerSprite.getDebugCollisionBox());
+
+	window->draw(TileEditorText);
+
+	window->draw(p1);
+	window->draw(p1.getDebugCollisionBox());
+
 
 	window->draw(e1);
 	window->draw(e1.getDebugCollisionBox());
 
+	if(editMode) tileManager.render();
+	
+	
 	endDraw();
+}
+
+void Level::moveView(float dt)
+{
+
+	// Move the view
+	view.setSize(window->getSize().x, window->getSize().y);	
+
+	//Printing the view size
+	//std::cout << "View size: " << view.getSize().x << " " << view.getSize().y << std::endl;
+	float MovementSpeed = 500.0f;
+	if (input->isKeyDown(sf::Keyboard::W))
+	{
+		view.move(0, -MovementSpeed * dt);
+	}
+	if (input->isKeyDown(sf::Keyboard::S))
+	{
+		view.move(0, MovementSpeed * dt);
+	}
+	if (input->isKeyDown(sf::Keyboard::A))
+	{
+		view.move(-MovementSpeed * dt, 0);
+	}
+	if (input->isKeyDown(sf::Keyboard::D))
+	{
+		view.move(MovementSpeed * dt, 0);
+	}
+
+	window->setView(view);
+
+}
+
+void Level::adjustViewToWindowSize(unsigned int width, unsigned int height) 
+{
+	sf::FloatRect visibleArea(0, 0, static_cast<float>(width), static_cast<float>(height));
+	view.setSize(static_cast<float>(width), static_cast<float>(height));
+	view.setCenter(static_cast<float>(width) / 2, static_cast<float>(height) / 2);
 }

@@ -5,9 +5,11 @@ C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framew
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\GameObject.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\GameObject.obj
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\GameState.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\GameState.obj
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\Input.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Input.obj
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\TileManager.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\TileManager.obj
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\Tiles.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Tiles.obj
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\World.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\World.obj
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Ground.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Ground.obj
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Level.obj
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Main.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Main.obj
-C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Map.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Map.obj
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Menu.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Menu.obj
-C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Platforms.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Platforms.obj
 C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Player.cpp;C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\x64\Debug\Player.obj
