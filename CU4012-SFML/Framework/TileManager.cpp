@@ -80,8 +80,8 @@ void TileManager::handleInput(float dt)
     }
 
     // Delete the selected tile
-    if (input->isKeyDown(sf::Keyboard::Delete)) {
-        input->setKeyUp(sf::Keyboard::Delete);
+    if (input->isKeyDown(sf::Keyboard::BackSlash)) {
+        input->setKeyUp(sf::Keyboard::BackSlash);
         if (activeTileIndex != -1) {
             world->RemoveGameObject(*tiles[activeTileIndex]);
             tiles.erase(tiles.begin() + activeTileIndex);

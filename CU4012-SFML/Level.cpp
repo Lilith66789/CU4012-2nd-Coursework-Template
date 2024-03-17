@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Player.h"
+#include "Collectables.h"
 
 Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 {
@@ -28,6 +29,9 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 	p1.setInput(input);
 
 	e1.setPosition(500, 100);
+
+	c1.setPosition(100, 300);
+
 	world->AddGameObject(p1);
 	world->AddGameObject(e1);
 
@@ -139,6 +143,9 @@ void Level::update(float dt)
 {
 	sf::Vector2f viewSize = sf::Vector2f(window->getSize().x, window->getSize().y);
 
+	if (p1.CollisionWithTag("Collectable")) {
+		std::cout << "Collision with Collectable\n";
+	}
 
 	if (p1.CollisionWithTag("Enemy"))
 	{
@@ -196,7 +203,13 @@ void Level::render()
 
 	}
 
+
+
 	window->draw(TileEditorText);
+
+
+	window->draw(c1);
+	window->draw(c1.getDebugCollisionBox());
 
 	window->draw(p1);
 	window->draw(p1.getDebugCollisionBox());
@@ -205,9 +218,11 @@ void Level::render()
 	window->draw(e1);
 	window->draw(e1.getDebugCollisionBox());
 
+
+
 	if(editMode) tileManager.render();
 	
-	
+
 	endDraw();
 }
 

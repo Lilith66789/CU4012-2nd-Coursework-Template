@@ -1,0 +1,56 @@
+﻿  Background.cpp
+  Collectables.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Collectables.cpp(5,28): warning C4129: 'C': unrecognized character escape sequence
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Collectables.cpp(5,28): warning C4129: 'I': unrecognized character escape sequence
+  Enemy.cpp
+  BaseLevel.cpp
+  Collision.cpp
+  GameObject.cpp
+  GameState.cpp
+  Input.cpp
+  TileManager.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\TileManager.cpp(44,51): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Tiles.cpp
+  World.cpp
+  Ground.cpp
+  Level.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(144,77): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(144,56): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(228,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(228,32): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+  Main.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Main.cpp(11,1): warning C4005: 'WINDOWWIDTH': macro redefinition
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\UI.h(5,1): message : see previous definition of 'WINDOWWIDTH'
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Main.cpp(12,1): warning C4005: 'WINDOWHEIGHT': macro redefinition
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\UI.h(6,1): message : see previous definition of 'WINDOWHEIGHT'
+  Menu.cpp
+  Player.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 600 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  CU4012-SFML.vcxproj -> C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\x64\Release\CU4012-SFML.exe

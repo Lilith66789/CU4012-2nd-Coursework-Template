@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Background.h"
+#include "Collectables.h"
 
 class Level : public BaseLevel{
 public:
@@ -30,6 +31,9 @@ private:
 	// Default variables for level class.
 	Player p1;
 	Enemy e1;
+	Collectables c1;
+
+	
 	
 	TileManager tileManager;
 
