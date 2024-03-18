@@ -7,8 +7,8 @@ Menu::Menu(sf::RenderWindow* hwnd, Input* in, GameState* game)
 	gameState = game;
 
 
-	UIfont.loadFromFile("font/ZOMBIES REBORN.ttf");
-	titleFont.loadFromFile("font/BloodBlocks Project.ttf");
+	UIfont.loadFromFile("font/VirtualRotRegular-R51V.ttf");
+	titleFont.loadFromFile("font/VirtualRotRegular-R51V.ttf");
 
 
 	menu_texture.loadFromFile("gfx/menu.png");

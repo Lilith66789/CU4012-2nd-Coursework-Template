@@ -4,7 +4,7 @@ Enemy::Enemy()
 {
 	health = 100;
 	speed = 150;
-	velocity.x = -1;
+	velocity.x = -150;
 
 	if (!texture.loadFromFile("gfx/Goomba.png"))
 	{
@@ -20,5 +20,4 @@ Enemy::Enemy()
 void Enemy::update(float dt)
 {
 	//std::cout<<isColliding()<<std::endl;
-	move(velocity * speed * dt);
 }

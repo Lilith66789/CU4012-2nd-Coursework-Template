@@ -34,6 +34,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 
 	world->AddGameObject(p1);
 	world->AddGameObject(e1);
+	world->AddGameObject(c1);
 
 	tileManager.setInput(input);
 	tileManager.setWindow(window);
@@ -143,26 +144,52 @@ void Level::update(float dt)
 {
 	sf::Vector2f viewSize = sf::Vector2f(window->getSize().x, window->getSize().y);
 
+	//for(int i=0;i<sizeOfCollectableArray;i++)
+	/*
+	if(c[i].CollisionWithTag("Player")
+	{
+		p1.AddCollectable();
+		c[i].setAlive(false);
+		world->RemoveGameObject(c[i]);
+	}
+	*/
+
 	if (p1.CollisionWithTag("Collectable")) {
-		std::cout << "Collision with Collectable\n";
+		//std::cout << "Collision with Collectable\n";
+		p1.AddCollectable();
+		c1.setAlive(false);
+		world->RemoveGameObject(c1);
 	}
 
 	if (p1.CollisionWithTag("Enemy"))
 	{
-		std::cout << "Collision with enemy\n";
+		if (p1.getCollisionDirection() == "Down")
+		{
+			std::cout << "Collision with enemy\n";
+			world->RemoveGameObject(e1);
+			e1.setAlive(false);
+		}
+
+		p1.ReduceHealth(0.1*dt);
+		std::cout << p1.getHealth() << std::endl;
+	}
+	if (p1.getHealth() <= 0)
+	{
+		p1.setAlive(false);
+		world->RemoveGameObject(p1); 
+		//gameState->setCurrentState(State::MENU);
 	}
 
 	if (e1.CollisionWithTag("Wall"))
 	{
-		world->RemoveGameObject(e1);
 		std::cout << "Collision with wall\n";
-		e1.setVelocity(-e1.getVelocity());
+		e1.setVelocity(-e1.getVelocity().x, e1.getVelocity().y);
 	}
 
 	if (editMode)
 	{
 		TileEditorText.setPosition(view.getCenter().x - viewSize.x / 2, view.getCenter().y - viewSize.y / 2);
-		TileEditorText.setString("Editing mode\nPress B to set collider as a wall (allows bouncing) \nPress E to exit and Save");
+		TileEditorText.setString("Editing mode\nLeft Mouse Button to place tile\nPress B to set collider as a wall (allows bouncing) \nPress E to exit and Save");
 		tileManager.handleInput(dt);
 		tileManager.update(dt);
 	}
@@ -208,17 +235,23 @@ void Level::render()
 	window->draw(TileEditorText);
 
 
-	window->draw(c1);
-	window->draw(c1.getDebugCollisionBox());
+	if (c1.isAlive())
+	{
+		window->draw(c1);
+		window->draw(c1.getDebugCollisionBox());
+	}
 
-	window->draw(p1);
-	window->draw(p1.getDebugCollisionBox());
+	if (p1.isAlive())
+	{
+		window->draw(p1);
+		window->draw(p1.getDebugCollisionBox());
+	}
 
-
-	window->draw(e1);
-	window->draw(e1.getDebugCollisionBox());
-
-
+	if (e1.isAlive())
+	{
+		window->draw(e1);
+		window->draw(e1.getDebugCollisionBox());
+	}
 
 	if(editMode) tileManager.render();
 	

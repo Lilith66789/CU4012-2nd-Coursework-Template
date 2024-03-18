@@ -22,7 +22,7 @@ Player::Player()
 void Player::handleInput(float dt)
 {
 
-	velocity = sf::Vector2f(0, 0);
+	velocity.x = 0.f;
 
 
 	// Check each key independently, rather than using else-if statements
@@ -34,18 +34,19 @@ void Player::handleInput(float dt)
 	{
 		velocity.x = 1 * speed;
 	}
-	if (input->isKeyDown(sf::Keyboard::S))
-	{
-		velocity.y = 1 * speed;
-	}
 	
-	if (input->isKeyDown(sf::Keyboard::W))
+	if (input->isKeyDown(sf::Keyboard::W)&&canJump|| input->isKeyDown(sf::Keyboard::Space) && canJump)
 	{
-		velocity.y = -1 * speed;
+		Jump(200.f);
 	}
 }
 
 void Player::update(float dt)
 {
 
+}
+
+void Player::ReduceHealth(float h)
+{
+	health -= h;
 }

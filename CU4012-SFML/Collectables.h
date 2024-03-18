@@ -1,7 +1,6 @@
 #pragma once
 #include "Framework/GameObject.h"
-class Collectables :
-    public GameObject
+class Collectables : public GameObject
 {
     sf::Texture texture;
 

@@ -2,10 +2,10 @@
 
 GameObject::GameObject()
 {
-	input = nullptr;
-	window = nullptr;
-	alive = true;
-	Colliding = false;
+    input = nullptr;
+    window = nullptr;
+    alive = true;
+    Colliding = false;
 
     collisionBoxDebug.setFillColor(sf::Color::Transparent);
     collisionBoxDebug.setOutlineColor(sf::Color::Red);
@@ -29,53 +29,53 @@ void GameObject::update(float dt)
 
 void GameObject::updateCollisionBox(float dt)
 {
-	collisionBox = sf::FloatRect(getPosition().x, getPosition().y, getSize().x, getSize().y);
-	setDebugCollisionBox(getPosition().x, getPosition().y, getSize().x, getSize().y);
+    collisionBox = sf::FloatRect(getPosition().x, getPosition().y, getSize().x, getSize().y);
+    setDebugCollisionBox(getPosition().x, getPosition().y, getSize().x, getSize().y);
 
 }
 
 // Sets the velocity of the sprite
 void GameObject::setVelocity(sf::Vector2f vel)
 {
-	if(!isStatic)
-	{ 
-		velocity = vel;
-	}
+    if (!isStatic)
+    {
+        velocity = vel;
+    }
 }
 void GameObject::setVelocity(float vx, float vy)
 {
-	if (!isStatic)
-	{
-		velocity.x = vx;
-		velocity.y = vy;
-	}
+    if (!isStatic)
+    {
+        velocity.x = vx;
+        velocity.y = vy;
+    }
 }
 
 void GameObject::applyImpulse(sf::Vector2f impulse)
 {
-	if (!isStatic)
-	{
-		velocity += impulse/mass;
-	}
+    if (!isStatic)
+    {
+        velocity += impulse / mass;
+    }
 }
 
 // get sprite velocity
 sf::Vector2f GameObject::getVelocity()
 {
-	return velocity;
+    return velocity;
 }
 
 // Returns collision box + position, giving the collision box in the correct position
 sf::FloatRect GameObject::getCollisionBox() {
-	
-	return collisionBox;
+
+    return collisionBox;
 
 }
 
 void GameObject::setDebugCollisionBox(float x, float y, float w, float h)
 {
-	collisionBoxDebug.setPosition(sf::Vector2f(x, y));
-	collisionBoxDebug.setSize(sf::Vector2f(w, h));
+    collisionBoxDebug.setPosition(sf::Vector2f(x, y));
+    collisionBoxDebug.setSize(sf::Vector2f(w, h));
 }
 
 bool GameObject::checkCollision(GameObject* otherBox)
@@ -91,7 +91,6 @@ bool GameObject::checkCollision(GameObject* otherBox)
     // Use intersects to check if the objects are colliding
     if (collisionBox.intersects(otherCollisionBox))
     {
-
         // Check if either object is a trigger and the other is not static
         //Doing this so that triggers can collide with non-static objects
         if ((isTrigger && !otherBox->getStatic()) || otherBox->getTrigger() && !isStatic)
@@ -128,20 +127,49 @@ bool GameObject::checkCollision(GameObject* otherBox)
                 if (deltaX > 0.0f) {
                     move(intersectX * (1.0f - push), 0.f);
                     otherBox->move(-intersectX * push, 0.0f);
+
+                    //Collision on the right
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = 1.f;
+                        Direction.y = 0.f;
+                    }
                 }
                 else {
                     move(-intersectX * (1.0f - push), 0.0f);
                     otherBox->move(intersectX * push, 0.0f);
+
+                    //Collision on the left
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = -1.f;
+                        Direction.y = 0.f;
+                    }
                 }
             }
             else {
                 if (deltaY > 0.0f) {
                     move(0.0f, intersectY * (1.f - push));
                     otherBox->move(0.0f, -intersectY * push);
+
+                    //Collision on the bottom
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = 0.f;
+                        Direction.y = 1.f;
+                    }
+                    canJump = true;
                 }
                 else {
                     move(0.0f, -intersectY * (1.0f - push));
                     otherBox->move(0.0f, intersectY * push);
+
+                    //Collision on the top
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = 0.f;
+                        Direction.y = -1.f;
+                    }
                 }
             }
 
@@ -176,20 +204,49 @@ bool GameObject::checkCollision(GameObject* otherBox)
                 if (deltaX > 0.0f) {
                     move(intersectX * (1.0f - push), 0.f);
                     otherBox->move(-intersectX * push, 0.0f);
+
+                    //Collision on the right
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = 1.f;
+                        Direction.y = 0.f;
+                    }
                 }
                 else {
                     move(-intersectX * (1.0f - push), 0.0f);
                     otherBox->move(intersectX * push, 0.0f);
+
+                    //Collision on the left
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = -1.f;
+                        Direction.y = 0.f;
+                    }
                 }
             }
             else {
                 if (deltaY > 0.0f) {
                     move(0.0f, intersectY * (1.f - push));
                     otherBox->move(0.0f, -intersectY * push);
+
+                    //Collision on the bottom
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = 0.f;
+                        Direction.y = 1.f;
+                    }
+                    canJump = true;
                 }
                 else {
                     move(0.0f, -intersectY * (1.0f - push));
                     otherBox->move(0.0f, intersectY * push);
+
+                    //Collision on the top
+                    if (!otherBox->getStatic())
+                    {
+                        Direction.x = 0.f;
+                        Direction.y = -1.f;
+                    }
                 }
             }
             return true;
@@ -200,6 +257,8 @@ bool GameObject::checkCollision(GameObject* otherBox)
     }
     return false;
 }
+
+
 
 
 // Reponse function, what the sprite does based on collision
@@ -214,20 +273,62 @@ void GameObject::collisionResponse(GameObject* collider)
         // If the collider is neither static nor a tile, update the colliding tag
         collidingTag = collider->getTag();
     }
-    else if (collider->getTile() && collider->getTag()=="Wall")
+    else if (collider->getTile() && collider->getTag() == "Wall")
     {
         collidingTag = collider->getTag();
     }
 }
-void GameObject::UpdatePhysics(sf::Vector2f* gravity,float deltaTime)
+
+void GameObject::Jump(float jumpHeight)
 {
-    if(!isStatic)
-    { 
-        velocity += force * mass * deltaTime;
-        setPosition(getPosition() + velocity * deltaTime);
+    velocity.y = -sqrt(2.0f * 981.0f * jumpHeight);
+    canJump = false;
+}
+
+std::string GameObject::getCollisionDirection()
+{
+    //If the direction is not 0,0
+    if (Direction.x != 0 || Direction.y != 0)
+    {
+        //If the direction is 1,0
+        if (Direction.x == 1)
+        {
+            return "Right";
+        }
+        //If the direction is -1,0
+        if (Direction.x == -1)
+        {
+            return "Left";
+        }
+        //If the direction is 0,1
+        if (Direction.y == 1)
+        {
+            return "Down";
+        }
+        //If the direction is 0,-1
+        if (Direction.y == -1)
+        {
+            return "Up";
+        }
+    }
+    return "None";
+}
+
+
+
+void GameObject::UpdatePhysics(sf::Vector2f* gravity, float deltaTime)
+{
+    if (!isStatic)
+    {
+        if (!isMassless)
+        {
+            velocity.y += gravity->y * deltaTime;
+            // Clamp the gravity so that the object does not fall through the floor also known as tunneling
+            velocity.y = std::min(velocity.y, gravity->y);
+        }
         angularVelocity += torque * deltaTime;
         setRotation(getRotation() + angularVelocity * deltaTime);
-        updateCollisionBox(deltaTime);
         move(velocity * deltaTime);
+        updateCollisionBox(deltaTime);
     }
 }

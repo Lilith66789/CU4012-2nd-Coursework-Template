@@ -38,6 +38,7 @@ private:
 	TileManager tileManager;
 
 	sf::Text TileEditorText;
+	sf::Text CollectableText;
 	sf::Font font;
 
 	bool editMode;
