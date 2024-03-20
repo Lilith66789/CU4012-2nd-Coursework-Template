@@ -3,12 +3,15 @@
 #include <iostream>
 class Player : public GameObject
 {
+public:
 	int health;
 	float speed;
 	sf::Texture texture;
-	int CollectableCount;
+	int CollectableCount = 0;
 	sf::Text collectableText;
 	sf::Font font;
+
+
 
 public:
 	Player();
@@ -18,5 +21,6 @@ public:
 	void ReduceHealth(float h);
 	void AddCollectable() { CollectableCount++; }
 	int getCollectableCount() { return CollectableCount; }
+	
 };
 

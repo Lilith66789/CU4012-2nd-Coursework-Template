@@ -5,6 +5,9 @@ class Collectables : public GameObject
     sf::Texture texture;
 
 public:
+
+
+
     Collectables();
 
     void update(float dt);

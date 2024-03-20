@@ -1,6 +1,7 @@
-﻿  Level.cpp
-C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Player.h(17,29): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(145,77): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+﻿  Collectables.cpp
+  Level.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Player.h(20,29): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(157,77): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -9,7 +10,7 @@ C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Lev
           [
               T=float
           ]
-C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(145,56): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(157,56): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -18,15 +19,24 @@ C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Lev
           [
               T=float
           ]
-C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(173,22): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(266,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(187,22): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(281,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=unsigned int
           ]
-C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(266,32): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Level.cpp(281,32): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=unsigned int
           ]
-  CU4012-SFML.vcxproj -> C:\Users\wpc0006\Documents\GitHub\CU4012-2nd-Coursework-Template\x64\Debug\CU4012-SFML.exe
+  Main.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Player.h(20,29): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Main.cpp(11,1): warning C4005: 'WINDOWWIDTH': macro redefinition
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\UI.h(5,1): message : see previous definition of 'WINDOWWIDTH'
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Main.cpp(12,1): warning C4005: 'WINDOWHEIGHT': macro redefinition
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Framework\UI.h(6,1): message : see previous definition of 'WINDOWHEIGHT'
+  Menu.cpp
+C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\CU4012-SFML\Player.h(20,29): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  CU4012-SFML.vcxproj -> C:\Users\Will\Documents\GitHub\CU4012-2nd-Coursework-Template\x64\Debug\CU4012-SFML.exe

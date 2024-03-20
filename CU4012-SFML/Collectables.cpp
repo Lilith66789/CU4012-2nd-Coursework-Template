@@ -12,6 +12,7 @@ Collectables::Collectables()
 	setTag("Collectable");
 	setTrigger(true);
 	setMassless(true);
+
 }
 
 

@@ -27,11 +27,15 @@ public:
 	void adjustViewToWindowSize(unsigned int width, unsigned int height);
 
 
+
 private:
 	// Default variables for level class.
 	Player p1;
 	Enemy e1;
-	Collectables c1;
+	Collectables c[6];
+
+	std::vector<Collectables> collectablesArray;
+	
 
 	
 	
@@ -48,6 +52,8 @@ private:
 	Background bg1[4];
 	Background bg2[4];
 	Background bg3[4];
+
+	Collectables c1;
 
 	sf::Texture backgroundTex[4];
 	

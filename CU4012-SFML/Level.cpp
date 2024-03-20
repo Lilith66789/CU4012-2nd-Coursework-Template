@@ -20,6 +20,17 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 	TileEditorText.setString(" Press E to edit tiles");
 	TileEditorText.setPosition(0, 0);
 
+	if (!font.loadFromFile("font/arial.ttf")) {
+		std::cout << "error loading font" << std::endl;
+	};
+
+	CollectableText.setFont(font);
+	CollectableText.setCharacterSize(24);
+	CollectableText.setFillColor(sf::Color::Red);
+
+
+	CollectableText.setPosition(1600, 0);
+
 
 	sf::View view(sf::FloatRect(0, 0, 1920, 1080));
 
@@ -31,6 +42,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 	e1.setPosition(500, 100);
 
 	c1.setPosition(100, 300);
+
 
 	world->AddGameObject(p1);
 	world->AddGameObject(e1);
@@ -144,7 +156,7 @@ void Level::update(float dt)
 {
 	sf::Vector2f viewSize = sf::Vector2f(window->getSize().x, window->getSize().y);
 
-	//for(int i=0;i<sizeOfCollectableArray;i++)
+	//for(int i=0;i<6;i++)
 	/*
 	if(c[i].CollisionWithTag("Player")
 	{
@@ -153,12 +165,14 @@ void Level::update(float dt)
 		world->RemoveGameObject(c[i]);
 	}
 	*/
+	CollectableText.setString(" Crystal Hearts: " + std::to_string(p1.getCollectableCount()) + " Collected");
 
 	if (p1.CollisionWithTag("Collectable")) {
 		//std::cout << "Collision with Collectable\n";
 		p1.AddCollectable();
 		c1.setAlive(false);
 		world->RemoveGameObject(c1);
+	
 	}
 
 	if (p1.CollisionWithTag("Enemy"))
@@ -172,6 +186,7 @@ void Level::update(float dt)
 
 		p1.ReduceHealth(0.1*dt);
 		std::cout << p1.getHealth() << std::endl;
+
 	}
 	if (p1.getHealth() <= 0)
 	{
@@ -231,7 +246,7 @@ void Level::render()
 	}
 
 
-
+	window->draw(CollectableText);
 	window->draw(TileEditorText);
 
 
