@@ -5,6 +5,8 @@ class Tiles :
 {
     bool editing; // To track editing mode
 
+    sf::Texture collectableTexture;
+    sf::Texture platformTexture;
 public:
     Tiles();
 

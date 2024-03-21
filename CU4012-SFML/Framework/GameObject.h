@@ -65,7 +65,7 @@ public:
 	void setStatic(bool s) { isStatic = s; }
 	bool getStatic() { return isStatic; }
 
-
+	void setMassless(bool m) { isMassless = m; }
 	float getMass() const
 	{
 		return isStatic ? std::numeric_limits<float>::infinity() : mass;
@@ -117,8 +117,6 @@ protected:
 		}
 	}
 
-	void setMassless (bool f) { isMassless = f; }
-
 	void setInertia(float i)
 	{
 		inertia = i;
@@ -137,6 +135,7 @@ protected:
 
 	// Sprite properties
 	sf::Vector2f velocity;
+	sf::Vector2f playerPos;
 	bool alive;
 	bool canJump;
 

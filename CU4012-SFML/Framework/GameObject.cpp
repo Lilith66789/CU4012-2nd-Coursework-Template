@@ -84,6 +84,16 @@ bool GameObject::checkCollision(GameObject* otherBox)
     if (isTile && otherBox->getTile()) {
         return false; // No collision detection between two tiles
     }
+    if (otherBox->getTag() == "Collectable" && tag == "Enemy" || otherBox->getTag() == "Enemy" && tag == "Collectable")
+    {
+        return false;
+    }
+    //Check if both objects are tagged as Enemy if they are , skip collision detection
+// This is to prevent the enemy from colliding with each other
+    if (otherBox->getTag() == "Enemy" && tag == "Enemy")
+    {
+        return false;
+    }
 
     // Get the collision box for both objects
     sf::FloatRect otherCollisionBox = otherBox->getCollisionBox();
@@ -277,8 +287,11 @@ void GameObject::collisionResponse(GameObject* collider)
     {
         collidingTag = collider->getTag();
     }
+    else if (collider->getTile() && collider->getTag() == "Collectable")
+    {
+        collidingTag = collider->getTag();
+    }
 }
-
 void GameObject::Jump(float jumpHeight)
 {
     velocity.y = -sqrt(2.0f * 981.0f * jumpHeight);
@@ -323,6 +336,7 @@ void GameObject::UpdatePhysics(sf::Vector2f* gravity, float deltaTime)
         if (!isMassless)
         {
             velocity.y += gravity->y * deltaTime;
+
             // Clamp the gravity so that the object does not fall through the floor also known as tunneling
             velocity.y = std::min(velocity.y, gravity->y);
         }

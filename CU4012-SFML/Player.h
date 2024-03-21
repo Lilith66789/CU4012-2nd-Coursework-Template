@@ -23,5 +23,6 @@ public:
 	int getCollectableCount() { return CollectableCount; }
 	void SetHealth(float ph);
 	
+	
 };
 

@@ -25,13 +25,6 @@ Death::Death(sf::RenderWindow* hwnd, Input* in, GameState* DEAD)
 	Title.setPosition(500, 50);
 
 
-	UIText[0].text.setFont(UIfont);
-	UIText[0].text.setFillColor(sf::Color::Red);
-	UIText[0].text.setString("Restart");
-	UIText[0].text.setPosition(sf::Vector2f(600, 120));
-	UIText[0].setCollisionBox(sf::FloatRect(600, 135, 35, 15));
-
-
 
 	UIText[1].text.setFont(UIfont);
 	UIText[1].text.setFillColor(sf::Color::White);

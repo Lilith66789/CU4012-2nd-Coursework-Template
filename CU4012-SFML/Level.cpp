@@ -27,9 +27,9 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 	CollectableText.setFont(font);
 	CollectableText.setCharacterSize(24);
 	CollectableText.setFillColor(sf::Color::Red);
+	CollectableText.setString("Crytal Hearts: 0 Collected ");
+	CollectableText.setPosition(100, 100);
 
-
-	CollectableText.setPosition(1600, 0);
 
 
 	sf::View view(sf::FloatRect(0, 0, 1920, 1080));
@@ -39,27 +39,26 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 	p1.setPosition(100, 100);
 	p1.setInput(input);
 
-	e1.setPosition(500, 100);
-
-	c0.setPosition(100, 300);
-	c1.setPosition(200, 300);
-	c2.setPosition(100, 300);
-	c3.setPosition(100, 300);
-	c4.setPosition(100, 300);
+	enemyArray[0].setPosition(500, 100);
+	enemyArray[1].setPosition(1800, 200);
+	enemyArray[2].setPosition(2800, 200);
+	enemyArray[3].setPosition(4000, 200);
+	enemyArray[4].setPosition(5100, 200);
+	
 
 
 
 	world->AddGameObject(p1);
-	world->AddGameObject(e1);
-	world->AddGameObject(c0);
-	world->AddGameObject(c1);
-	world->AddGameObject(c2);
-	world->AddGameObject(c3);
-	world->AddGameObject(c4);
+	for (int i = 0; i < 5; i++) {
+		world->AddGameObject(enemyArray[i]);
+	}
+
 
 	tileManager.setInput(input);
 	tileManager.setWindow(window);
+	tileManager.ShowDebugCollisionBox(true);
 	tileManager.setWorld(world);
+	tileManager.setCollectableTexture("Assets/Collectables/CrystalHeart.png");
 
 	if (!tileManager.loadTiles())
 	{
@@ -165,41 +164,55 @@ void Level::update(float dt)
 {
 	sf::Vector2f viewSize = sf::Vector2f(window->getSize().x, window->getSize().y);
 
-	for(int i=0;i<6;i++)
-	if(c[i].CollisionWithTag("Player"))
+	if (p1.CollisionWithTag("Collectable"))
 	{
-		p1.AddCollectable();
-		c[i].setAlive(false);
-		world->RemoveGameObject(c[i]);
+		// Player is Colliding with Collectable
+		p1.AddCollectable(); // Increment Collectable count
+		tileManager.RemoveCollectable(); // Remove the collectable
+
+		// Update the CollectablesCollectedText to display the new number of rings collected
+		int collectableCount = p1.getCollectableCount(); // Assume p1 is the player object and has the getCollectablesCount method
+		CollectableText.setString("Crystal Hearts: " + std::to_string(collectableCount) + " Collected");
 	}
 
-	CollectableText.setString(" Crystal Hearts: " + std::to_string(p1.getCollectableCount()) + " Collected");
 
 	if (p1.CollisionWithTag("Enemy"))
 	{
-		if (p1.getCollisionDirection() == "Down")
-		{
-			std::cout << "Collision with enemy\n";
-			world->RemoveGameObject(e1);
-			e1.setAlive(false);
+		if (p1.getCollisionDirection()=="Down") {
+
+			for (int i = 0; i < 5; i++)
+			{
+				if (enemyArray[i].CollisionWithTag("Player"))
+				{
+					world->RemoveGameObject(enemyArray[i]);
+					enemyArray[i].setAlive(false);
+				}
+
+			}
+			
 		}
-
-		p1.ReduceHealth(0.1*dt);
+		p1.ReduceHealth(0.1 * dt);
 		std::cout << p1.getHealth() << std::endl;
-
 	}
+	
 	if (p1.getHealth() <= 0)
 	{
 		p1.setAlive(false);
 		world->RemoveGameObject(p1); 
 		gameState->setCurrentState(State::DEAD);
-		p1.SetHealth(100);
+		p1.setPosition(sf::Vector2f(100, p1.getPosition().y));
+	}
+	for (int i = 0; i < 5; i++) {
+		if (enemyArray[i].CollisionWithTag("Wall"))
+		{
+			std::cout << "Collision with wall\n";
+			enemyArray[i].setVelocity(-enemyArray[i].getVelocity().x, enemyArray[i].getVelocity().y);
+		}
 	}
 
-	if (e1.CollisionWithTag("Wall"))
-	{
-		std::cout << "Collision with wall\n";
-		e1.setVelocity(-e1.getVelocity().x, e1.getVelocity().y);
+	if (p1.getPosition().x >7200) {
+		p1.setPosition(sf::Vector2f(100, p1.getPosition().y));
+		gameState->setCurrentState(State::WINSCREEN);
 	}
 
 	if (editMode)
@@ -225,8 +238,11 @@ void Level::update(float dt)
 		TileEditorText.setPosition(view.getCenter().x - viewSize.x / 2, view.getCenter().y - viewSize.y / 2);
 		TileEditorText.setString("Press E to edit tiles");
 
+		CollectableText.setPosition(view.getCenter().x - viewSize.x / 24, view.getCenter().y - viewSize.y / 2);
+
 		window->setView(view);
 	}
+
 
 	
 }
@@ -247,30 +263,29 @@ void Level::render()
 	}
 
 
-	window->draw(CollectableText);
-	window->draw(TileEditorText);
 
-	for (int i = 0; i < 6; i++)
-	if (c[i].isAlive())
-	{
-		window->draw(c[i]);
-		window->draw(c[i].getDebugCollisionBox());
-	}
+
+
 
 	if (p1.isAlive())
 	{
 		window->draw(p1);
-		window->draw(p1.getDebugCollisionBox());
+		//window->draw(p1.getDebugCollisionBox());
+	}
+	for (int i = 0; i < 5; i++) {
+		if (enemyArray[i].isAlive())
+		{
+			window->draw(enemyArray[i]);
+			//window->draw(enemyArray[i].getDebugCollisionBox());
+		}
 	}
 
-	if (e1.isAlive())
-	{
-		window->draw(e1);
-		window->draw(e1.getDebugCollisionBox());
-	}
+	tileManager.render(editMode);
 
-	if(editMode) tileManager.render();
-	
+	window->draw(CollectableText);
+	if (editMode) {
+		window->draw(TileEditorText);
+	}
 
 	endDraw();
 }

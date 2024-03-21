@@ -31,8 +31,7 @@ public:
 private:
 	// Default variables for level class.
 	Player p1;
-	Enemy e1;
-	Collectables c[6];
+	Enemy enemyArray[5];
 
 
 
@@ -55,11 +54,7 @@ private:
 	Background bg2[4];
 	Background bg3[4];
 
-	Collectables c0;
-	Collectables c1;
-	Collectables c2;
-	Collectables c3;
-	Collectables c4;
+
 				 
 
 	sf::Texture backgroundTex[4];
