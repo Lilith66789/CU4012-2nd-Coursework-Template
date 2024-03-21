@@ -34,6 +34,8 @@ private:
 	Enemy e1;
 	Collectables c[6];
 
+
+
 	std::vector<Collectables> collectablesArray;
 	
 
@@ -53,7 +55,12 @@ private:
 	Background bg2[4];
 	Background bg3[4];
 
+	Collectables c0;
 	Collectables c1;
+	Collectables c2;
+	Collectables c3;
+	Collectables c4;
+				 
 
 	sf::Texture backgroundTex[4];
 	

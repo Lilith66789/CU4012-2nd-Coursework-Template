@@ -21,6 +21,7 @@ public:
 	void ReduceHealth(float h);
 	void AddCollectable() { CollectableCount++; }
 	int getCollectableCount() { return CollectableCount; }
+	void SetHealth(float ph);
 	
 };
 

@@ -50,3 +50,8 @@ void Player::ReduceHealth(float h)
 {
 	health -= h;
 }
+
+void Player::SetHealth(float ph)
+{
+	health = 100;
+}

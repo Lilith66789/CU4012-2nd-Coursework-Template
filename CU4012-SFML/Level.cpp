@@ -41,12 +41,21 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, World* w)
 
 	e1.setPosition(500, 100);
 
-	c1.setPosition(100, 300);
+	c0.setPosition(100, 300);
+	c1.setPosition(200, 300);
+	c2.setPosition(100, 300);
+	c3.setPosition(100, 300);
+	c4.setPosition(100, 300);
+
 
 
 	world->AddGameObject(p1);
 	world->AddGameObject(e1);
+	world->AddGameObject(c0);
 	world->AddGameObject(c1);
+	world->AddGameObject(c2);
+	world->AddGameObject(c3);
+	world->AddGameObject(c4);
 
 	tileManager.setInput(input);
 	tileManager.setWindow(window);
@@ -156,24 +165,15 @@ void Level::update(float dt)
 {
 	sf::Vector2f viewSize = sf::Vector2f(window->getSize().x, window->getSize().y);
 
-	//for(int i=0;i<6;i++)
-	/*
-	if(c[i].CollisionWithTag("Player")
+	for(int i=0;i<6;i++)
+	if(c[i].CollisionWithTag("Player"))
 	{
 		p1.AddCollectable();
 		c[i].setAlive(false);
 		world->RemoveGameObject(c[i]);
 	}
-	*/
-	CollectableText.setString(" Crystal Hearts: " + std::to_string(p1.getCollectableCount()) + " Collected");
 
-	if (p1.CollisionWithTag("Collectable")) {
-		//std::cout << "Collision with Collectable\n";
-		p1.AddCollectable();
-		c1.setAlive(false);
-		world->RemoveGameObject(c1);
-	
-	}
+	CollectableText.setString(" Crystal Hearts: " + std::to_string(p1.getCollectableCount()) + " Collected");
 
 	if (p1.CollisionWithTag("Enemy"))
 	{
@@ -192,7 +192,8 @@ void Level::update(float dt)
 	{
 		p1.setAlive(false);
 		world->RemoveGameObject(p1); 
-		//gameState->setCurrentState(State::MENU);
+		gameState->setCurrentState(State::DEAD);
+		p1.SetHealth(100);
 	}
 
 	if (e1.CollisionWithTag("Wall"))
@@ -249,11 +250,11 @@ void Level::render()
 	window->draw(CollectableText);
 	window->draw(TileEditorText);
 
-
-	if (c1.isAlive())
+	for (int i = 0; i < 6; i++)
+	if (c[i].isAlive())
 	{
-		window->draw(c1);
-		window->draw(c1.getDebugCollisionBox());
+		window->draw(c[i]);
+		window->draw(c[i].getDebugCollisionBox());
 	}
 
 	if (p1.isAlive())
